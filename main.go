@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bytes"
+	// "bytes"
 	"fmt"
 	"strings"
 
-	"github.com/PuerkitoBio/goquery"
+	// "github.com/PuerkitoBio/goquery"
 
 	"github.com/sjxiang/go-crawler/collect"
 )
@@ -14,7 +14,7 @@ import (
 func main() {
 	url := "https://book.douban.com/annual/2022?fullscreen=1&source=navigation"
 	
-	var f collect.Fetcher = collect.BaseFetch{}
+	var f collect.Fetcher = collect.BrowerFetch{}
 	body, err := f.Get(url)
 
 	if err != nil {
@@ -22,18 +22,19 @@ func main() {
 		return
 	}
 
+	fmt.Println(string(body))
 
-	// 加载 HTML 文档
-	doc, err := goquery.NewDocumentFromReader(bytes.NewBuffer(body))
-	if err != nil {
-		fmt.Printf("read content failed:%v", err)
-	}
+	// // 加载 HTML 文档
+	// doc, err := goquery.NewDocumentFromReader(bytes.NewBuffer(body))
+	// if err != nil {
+	// 	fmt.Printf("read content failed:%v", err)
+	// }
 
-	doc.Find("div.index-leftside h2").Each(func(i int, s *goquery.Selection) {
-		// 获取匹配标签中的文本
-		title := s.Text()
-		fmt.Printf("%d, %s\n", i, title)
-	})
+	// doc.Find("div.index-leftside h2").Each(func(i int, s *goquery.Selection) {
+	// 	// 获取匹配标签中的文本
+	// 	title := s.Text()
+	// 	fmt.Printf("%d, %s\n", i, title)
+	// })
 	
 }
 
